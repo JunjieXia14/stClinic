@@ -12,3 +12,55 @@ stClinic is a tool for predicting clinically relevant tumor microenvironments fr
 
 
 **a.** Given omics profiles (*X*) and spatial location (*S*) data across multiple slices as the input, stClinic is able to learn batch-corrected features (*z*) in unsupervised manner, and predict clinically relevant TMEs under supervision of clinical information (*Y*). **b.** stClinic utilizes a VGAE (consisting of a GAT encoder and *L* one-layer slice specific decoders) to transform *X* and a unified graph (including both intra-edges for spatially nearest spots within each slice and inter-edges for omics-similar spots across different slices) into latent features (*z*) on the GMM manifold, and repeatedly removes associations between any two spots from different GMM components to eliminate impact of false positive relations between them. **c.** stClinic adopts six statistical measures in two-dimensional UMAP space to quantify the $k_{th}$ cluster, and fuses them to characterize the representations of the $i_{th}$ slice ($r_{i}$) using attention, then learns the weight ($W^T$) of different clusters on clinical outcomes from a FC layer with SoftMax or Cox layer under supervision of sample labels. **d.** The joint low-dimensional features *z* and weight ($W^T$) of different clusters on clinical outcomes can be used for visualization, data denoising, identifing slice-specific TMEs, and predicting condition-specific TME.
+
+## Installation
+
+Installation was tested on Ubuntu 22.10 with Python 3.8.17, Scanpy 1.9.3, PyTorch 1.12.0, and PyG (PyTorch Geometric) 2.3.0 on a machine with one 40-core Intel(R) Xeon(R) Silver 4210R CPU addressing with 128GB RAM, and one NVIDIA A800 GPU addressing 80GB. Please run stClinic on CUDA if possible.
+
+### 1. Grab source code of stClinic
+
+```bash
+git clone https://github.com/JunjieXia14/stClinic.git
+cd stClinic-main
+```
+
+### 2. Install stClinic in the virtual environment by conda
+
+* Firstly, install conda: https://docs.anaconda.com/anaconda/install/index.html
+* Then, automatically install all used packages (described by "environment.yml") for stClinic in a few mins.
+
+```bash
+conda config --set channel_priority strict
+conda env create -f environment.yml
+conda activate stClinic
+```
+
+Other software dependencies are listed in "requirements.txt".
+
+## Quick start
+
+### Input
+
+### Run
+
+### Output
+
+## More tutorials
+
+Three step-by-step tutorials are introduced in the `Tutorials` folder to demonstrate how to implement stClinic:
+
+* Tutorial 1: Integrating 4 DLPFC slices of homogeneous tissue.
+* Tutorial 2: Integrating 2 breast cancer slices of heterogeneous tissues.
+* Tutorial 3: Predicting metastasis-related tumor microenvironments from integrated colorectal cancer and liver metastasis slices.
+
+## References
+
+* stMVC: https://github.com/cmzuo11/stMVC
+* STAligner: https://github.com/zhoux85/STAligner
+* CellCharter: https://github.com/CSOgroup/cellcharter
+* CytoCommunity: https://github.com/huBioinfo/CytoCommunity
+* PathFinder: https://github.com/Biooptics2021/PathFinder
+
+## Citation
+
+stClinic predicts clinically relevant tumor microenvironments using spatial omics data.
