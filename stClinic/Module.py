@@ -463,6 +463,56 @@ def train_Integration_Model(adata,
 
 
 
+def stClinic_Statistics_Measures(adata, sorted_batch):
+
+    # Statistical representations of all slices
+    All_cluster_repr = []
+    for bid in sorted_batch:
+
+        batch_obs = adata.obs[ adata.obs['batch_name'] == bid ]
+        batch_repr = adata.obsm['X_umap'][ adata.obs['batch_name'] == bid, :]
+
+        res_obs = adata.obs[ adata.obs['batch_name'] != bid ]
+
+        # Statistical representations of each slice (Before transpose)
+        batch_cluster_repr = []
+        for cluster in np.unique(adata.obs['louvain']):
+            if cluster in np.unique(batch_obs['louvain']):
+
+                repr_init = batch_repr[ batch_obs['louvain'] == cluster, :]
+
+                repr_mean = np.mean( repr_init, axis=0 )
+                repr_var = np.mean(repr_init * repr_init, axis=0) - repr_mean * repr_mean
+
+                repr_L2 = np.sum(repr_init * repr_init,axis=1)
+                repr_max, repr_min = repr_init[np.argmax(repr_L2),:], repr_init[np.argmin(repr_L2),:]
+
+                repr_p1 = np.array([repr_init.shape[0] / batch_repr.shape[0]])
+
+                repr = np.concatenate([repr_mean, repr_var, repr_max, repr_min, repr_p1])
+
+            else:
+                repr = np.zeros(9)
+
+            repr_p2 = np.array([res_obs[res_obs['louvain']==cluster].shape[0] / res_obs.shape[0]])
+
+            repr = np.concatenate([repr, repr_p2])
+
+            batch_cluster_repr.append(repr)
+
+        All_cluster_repr.append(batch_cluster_repr)
+
+    adata.uns['Cluster_repr'] = np.array(All_cluster_repr)
+
+    # Normalization
+    adata.uns['Cluster_repr'] = np.concatenate(adata.uns['Cluster_repr'])
+    adata.uns['Cluster_repr'] = (adata.uns['Cluster_repr'] - adata.uns['Cluster_repr'].mean(axis=0)) / adata.uns['Cluster_repr'].std(axis=0)
+    adata.uns['Cluster_repr'] = np.reshape(adata.uns['Cluster_repr'], (len(sorted_batch), len(np.unique(adata.obs['louvain'])), adata.uns['Cluster_repr'].shape[1]))
+
+    return adata
+
+
+
 class stClinic_Prediction_Model(nn.Module):
     def __init__(self, hidden_dims_pred, stat_dim):
         super(stClinic_Prediction_Model, self).__init__()
