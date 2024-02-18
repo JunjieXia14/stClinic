@@ -20,7 +20,7 @@ from pathlib import Path
 path = Path("DLPFC")
 path.mkdir(parents=True, exist_ok=True)
 
-# set seed
+# Set seed
 seed = 666
 np.random.seed(seed)
 random.seed(seed)
@@ -35,18 +35,18 @@ adj_list = []
 
 for idx, section_id in enumerate(section_ids):
 
-    # read h5 file
+    # Read h5 file
     input_dir = os.path.join('/home/zuocm/Share_data/xiajunjie/stClinic/Datasets/DLPFC/', section_id)
     adata = sc.read_visium(path=input_dir, count_file='filtered_feature_bc_matrix.h5', load_images=True)
     adata.var_names_make_unique(join="++")
 
-    # read corresponding annotation file
+    # Read corresponding annotation file
     Ann_df = pd.read_csv(os.path.join(input_dir, section_id + '_annotation.txt'), sep='\t', header=0, index_col=0)
     Ann_df.loc[Ann_df['Layer'].isna(),'Layer'] = "unknown"
     adata.obs['Ground Truth'] = Ann_df.loc[adata.obs_names, 'Layer'].astype('category')
     adata.obs['batch_name_idx'] = idx
 
-    # make spot name unique
+    # Make spot name unique
     adata.obs_names = [x+'_'+section_id for x in adata.obs_names]
 
     # Construct intra-edges
@@ -67,7 +67,7 @@ for idx, section_id in enumerate(section_ids):
 adata_concat = anndata.concat(Batch_list, label="slice_name", keys=section_ids)
 adata_concat.obs['Ground Truth'] = adata_concat.obs['Ground Truth'].astype('category')
 adata_concat.obs["batch_name"] = adata_concat.obs["slice_name"].astype('category')
-print('Shape of concatenated AnnData object: ', adata_concat.shape)
+print('\nShape of concatenated AnnData object: ', adata_concat.shape)
 
 # Construct unified graph
 # mnn_dict = create_dictionary_mnn(adata_concat, use_rep='X_pca', batch_name='batch_name', k=1) # k=0
