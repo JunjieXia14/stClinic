@@ -6,8 +6,6 @@
 
 stClinic is a tool for predicting clinically relevant tumor microenvironments from spatial omics data.
 
-**a.** Given omics profiles (*X*) and spatial location (*S*) data across multiple slices as the input, stClinic is able to learn batch-corrected features (*z*) in unsupervised manner, and predict clinically relevant TMEs under supervision of clinical information (*Y*). **b.** stClinic utilizes a VGAE (consisting of a GAT encoder and *L* one-layer slice specific decoders) to transform *X* and a unified graph (including both intra-edges for spatially nearest spots within each slice and inter-edges for omics-similar spots across different slices) into latent features (*z*) on the GMM manifold, and repeatedly removes associations between any two spots from different GMM components to eliminate impact of false positive relations between them. **c.** stClinic adopts six statistical measures in two-dimensional UMAP space to quantify the $k_{th}$ cluster, and fuses them to characterize the representations of the $i_{th}$ slice ($r_{i}$) using attention, then learns the weight ($W^T$) of different clusters on clinical outcomes from a FC layer with SoftMax or Cox layer under supervision of sample labels. **d.** The joint low-dimensional features *z* and weight ($W^T$) of different clusters on clinical outcomes can be used for visualization, data denoising, identifing slice-specific TMEs, and predicting condition-specific TME.
-
 ## Installation
 
 Installation was tested on Ubuntu 22.10 with Python 3.8.17, Scanpy 1.9.3, PyTorch 1.12.0, and PyG (PyTorch Geometric) 2.3.0 on a machine with one 40-core Intel(R) Xeon(R) Silver 4210R CPU addressing with 128GB RAM, and one NVIDIA A800 GPU addressing 80GB. Please run stClinic on CUDA if possible.
@@ -51,8 +49,6 @@ python DLPFC_Unsupervised_Integration.py
 
 This script automatically (1) loads the input data as an concatenated `AnnData` object, (2) constructs an unified graph based on spatial location and omics similarity, (3) learns batch-corrected features of four slices by stClinic in an unsupervised manner, (4) identifies spatial domains according to the joint embeddings by `mclust` algorithm, and (5) projects the latent features into 2D-UMAP space.
 
-Note: To reduce your waiting time, we have uploaded the processed `AnnData` object into `Datasets/DLPFC`.
-
 **Hyperparameters**
 
 * R / rpy2 workpath: defines the work path of your R software and rpy2 package.
@@ -68,6 +64,8 @@ Note: To reduce your waiting time, we have uploaded the processed `AnnData` obje
 #### Output
 
 An concatenated `AnnData` object with stClinic embeddings and UMAP coordinates of four slices stored in `AnnData.obsm`, and spatial cluster labels stored in `AnnData.obs.mclust`.
+
+Note: To reduce your waiting time, we have uploaded the processed `AnnData` object into `Datasets/DLPFC`.
 
 ### Supervised stClinic for predicting clinically relevant TMEs
 
