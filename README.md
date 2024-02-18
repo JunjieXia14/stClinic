@@ -77,10 +77,28 @@ We take the human colorectal cancer and liver metastasis (CRCLM) dataset of 10X 
 
 #### Run
 
-We firstly run the following commands in Linux Bash Shell to learn :
+We firstly run the following commands in Linux Bash Shell to (1) learn shared features of 24 CRCLM slices, (2) identifies spatial domains according to the joint embeddings by `Louvain` algorithm, and (3) project the latent features into 2D-UMAP space.
 
+```bash
+cd Tutorials/code
+python CRCLM_Unsupervised_Integration.py
+```
+
+We then run the following command in Linux Bash Shell:
+
+```bash
+python CRCLM_Supervised_Prediction.py
+```
+
+This script automatically (1).
+
+**Hyperparameters**
+
+* lr: defines.
 
 #### Output
+
+An concatenated `AnnData` object with stClinic embeddings and UMAP coordinates of 24 slices stored in `AnnData.obsm`, spatial cluster labels stored in `AnnData.obs.louvain`, and cluster contribution scores stored in `AnnData.uns`.
 
 ## More tutorials
 
