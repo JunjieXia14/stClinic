@@ -51,6 +51,8 @@ python DLPFC_Unsupervised_Integration.py
 
 This script automatically (1) loads the input data as an concatenated `AnnData` object, (2) constructs an unified graph based on spatial location and omics similarity, (3) learns batch-corrected features of four slices by stClinic in an unsupervised manner, (4) identifies spatial domains according to the joint embeddings by `mclust` algorithm, and (5) projects the latent features into 2D-UMAP space.
 
+Note: To reduce your waiting time, we have uploaded the processed `AnnData` object into `Datasets/DLPFC`.
+
 **Hyperparameters**
 
 * R / rpy2 workpath: defines the work path of your R software and rpy2 package.
@@ -81,6 +83,8 @@ We firstly run the following commands in Linux Bash Shell to (1) learn shared fe
 cd Tutorials/code
 python CRCLM_Unsupervised_Integration.py
 ```
+
+Note: To reduce your waiting time, we have uploaded the processed `AnnData` object into `Datasets/CRCLM`.
 
 We then run the following command in Linux Bash Shell:
 
