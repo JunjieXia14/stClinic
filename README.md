@@ -90,11 +90,12 @@ We then run the following command in Linux Bash Shell:
 python CRCLM_Supervised_Prediction.py
 ```
 
-This script automatically (1).
+This script automatically (1) computes 6 statistics measures of each cluster, (2) fuses them into slice representations by attention mechanism, (3) predicts condition-specific TMEs with the highest cluster contribution scores on different clinical states.
 
 **Hyperparameters**
 
-* lr: defines.
+* pred_type: defines the prediction type of supervised stClinic model. In prognosis prediction task, the value is set to 'survival', which in classification task, the value is set to 'grading'.
+* lr: defines learning rate parameter for predicting sample labels by supervised stClinic. The parameter is set to the value with the highest C-Index or classification accuracy in the grid search program of cross-validation.
 
 #### Output
 
