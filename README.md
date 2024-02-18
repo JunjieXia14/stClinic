@@ -55,7 +55,19 @@ This script automatically (1) loads the input data as an concatenated `AnnData` 
 
 **Hyperparameters**
 
+* R and rpy2 workpath:
+* used_device:
+* input_dir:
+* output_dir:
+* rad_cutoff / k_cutoff:
+* n_top_genes:
+* k:
+* n_centroids:
+* lr:
+
 #### Output
+
+An concatenated `AnnData` object with stClinic embeddings of four slices stored in `AnnData.obsm`, and spatial cluster labels stored in `AnnData.obs.mclust`.
 
 ### Supervised stClinic for predicting clinically relevant TMEs
 
@@ -67,7 +79,7 @@ This script automatically (1) loads the input data as an concatenated `AnnData` 
 
 ## More tutorials
 
-Three more detailed and step-by-step tutorials are introduced in the `Tutorials/notebook` folder to demonstrate how to implement stClinic:
+Three more detailed tutorials and further visualization are introduced in the `Tutorials/notebook` folder to demonstrate how to implement stClinic:
 
 * Tutorial 1: Integrating 4 DLPFC slices of homogeneous tissue.
 * Tutorial 2: Integrating 2 breast cancer slices of heterogeneous tissues.
