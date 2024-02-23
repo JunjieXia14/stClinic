@@ -4,6 +4,8 @@
 
 ## Overview
 
+![image](https://github.com/JunjieXia14/stClinic/blob/main/image/stClinic_logo.png)
+
 stClinic is a tool for predicting clinically relevant tumor microenvironments from spatial omics data.
 
 ## Installation
