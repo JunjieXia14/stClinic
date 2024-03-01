@@ -1,6 +1,6 @@
 # stClinic
 
-*stClinic predicts clinically relevant tumor microenvironments using spatial omics data.*
+*stClinic predicts clinically relevant tumor microenvironments from spatial omics data by dynamic graph learning.*
 
 ## Overview
 
@@ -121,4 +121,4 @@ Three more detailed tutorials and further visualization are introduced in the `T
 
 ## Citation
 
-stClinic predicts clinically relevant tumor microenvironments using spatial omics data.
+* Xia J, Xu Y, Xu Y, Gao P, Zhang J, Wang Y, Zuo C*. stClinic predicts clinically relevant tumor microenvironments from spatial omics data by dynamic graph learning. 2024. (Submitted)
