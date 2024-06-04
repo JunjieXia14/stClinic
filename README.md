@@ -22,7 +22,7 @@ cd stClinic-main
 ### 2. Install stClinic in the virtual environment by conda
 
 * Firstly, install conda: https://docs.anaconda.com/anaconda/install/index.html
-* Then, automatically install all used packages (described by "environment.yml") for stClinic in XX mins.
+* Then, automatically install all used packages (described by "environment.yml") for stClinic in a few mins.
 
 ```bash
 conda config --set channel_priority strict
@@ -48,20 +48,21 @@ Run the following commands in Linux Bash Shell:
 
 ```bash
 cd Tutorials/code
-python DLPFC_Unsupervised_Integration.py --input_dir --path ./DLPFC
+python DLPFC_Unsupervised_Integration.py
 ```
 
-The script automatically (1) loads the input data as concatenated `AnnData` object, (2) builds an initial unified graph based on spatial locations and omics profiles, (3) learns batch-corrected features of four slices by stClinic in an unsupervised manner, (4) identifies spatial domains based on batch-corrected features using the `mclust` algorithm, and (5) maps the latent features into 2D-UMAP space. It takes ?(xx) mins.
+The script automatically (1) loads the input data as concatenated `AnnData` object, (2) builds an initial unified graph based on spatial locations and omics profiles, (3) learns batch-corrected features of four slices by stClinic in an unsupervised manner, (4) identifies spatial domains based on batch-corrected features using the `mclust` algorithm, and (5) maps the latent features into 2D-UMAP space.
 
 **Hyperparameters**
 
-* rad_cutoff: The radius value used to construct intra-edge (i.e., spatial nearest neighbors) for each slice. And the k_cutoff defines 
+* rad_cutoff: The radius value used to construct intra-edge (i.e., spatial nearest neighbors) for each slice. And the k_cutoff defines
 * k_cutoff: The number of spatial neighbors used to construct intra-edge. The default value is 6.
 * k: The number of mutual nearest neighbors used to construct inter-edges across slices. In heterogeneous tissues such as tumors, the value is set to 5; in spatial multi-omics dataset, the value is set to 10; and in relatively homogeneous tissues, the value is 1 or 0.
 * n_top_genes: The number of highly variable genes selected for each slice. The default value is 5000, which can be larger than the default for heterogeneous datasets.
 * n_centroids: The number of components of the GMM.
 * lr: The learning rate used by stClinic when extracting batch-corrected features in slices. The default value is 0.0005. You can adjust it from 0.0005/20 to 0.0005 based on your data.
-
+* input_dir: defines the directory of input data files.
+* path: defines the directory of output data files. The default value is './DLPFC'.
 
 #### Output
 
@@ -77,7 +78,7 @@ We take the human colorectal cancer and liver metastasis (CRCLM) dataset of 10X 
 
 #### Run
 
-We firstly run the following commands in Linux Bash Shell to (1) learn shared features of 24 CRCLM slices, (2) identifies spatial domains according to the joint embeddings by `Louvain` algorithm, and (3) project the latent features into 2D-UMAP space. It takes XX ? mins.
+We firstly run the following commands in Linux Bash Shell to (1) learn shared features of 24 CRCLM slices, (2) identifies spatial domains according to the joint embeddings by `Louvain` algorithm, and (3) project the latent features into 2D-UMAP space.
 
 ```bash
 cd Tutorials/code
@@ -92,12 +93,12 @@ We then run the following command in Linux Bash Shell:
 python CRCLM_Supervised_Prediction.py
 ```
 
-This script automatically (1) computes 6 statistics measures of each cluster, (2) fuses them into slice representations by attention mechanism, (3) predicts condition-specific TMEs with the highest cluster contribution scores on different clinical states. It takes XX mins.
+This script automatically (1) computes 6 statistics measures of each cluster, (2) fuses them into slice representations by attention mechanism, (3) predicts condition-specific TMEs with the highest cluster contribution scores on different clinical states.
 
 **Hyperparameters**
 
 * pred_type: The type of clinical data. The value is 'survival' when using survival time; and the value is 'grading' when using categorical data.
-* lr: The learning rate used by supervised stClinic. The default value is XX. You can adjust it rang from XX to XX based on your data. 
+* lr: The learning rate used by supervised stClinic. The parameter is set to the value with the highest C-Index or classification accuracy in the grid search program of cross-validation.
 
 #### Output
 
