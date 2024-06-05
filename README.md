@@ -1,4 +1,4 @@
-![image](https://github.com/JunjieXia14/stClinic/assets/134852679/398f3609-9ebc-4f72-9454-451ea8812b10)# stClinic
+# stClinic
 
 *stClinic dissects clinically relevant niches by integrating spatial multi-slice multi-omics data in dynamic graphs.*
 
@@ -100,15 +100,15 @@ This script automatically (1) computes 6 statistics measures of each cluster, (2
 
 #### Output
 
-An `AnnData` object with stClinic embeddings and UMAP coordinates for 24 slices stored in `AnnData.obsm`, spatial cluster labels stored in `AnnData.obs.louvain`, and cluster contribution scores stored in `AnnData.uns`.
+An AnnData object encompasses AnnData.obsm, which holds the latent features of stClinic and the UMAP embeddings of latent features for the 24 slices; AnnData.obs.louvain, which comprises spatial clusters; and AnnData.uns, which stores the weights of each cluster.
 
 ## More tutorials
 
-Three more detailed tutorials and further visualization are introduced in the `Tutorials/notebook` folder to demonstrate how to implement stClinic:
+More detailed tutorials for each dataset are described in the `Tutorials/notebook` folder:
 
-* Tutorial 1: Integrating 4 DLPFC slices of homogeneous tissue.
-* Tutorial 2: Integrating 2 breast cancer slices of heterogeneous tissues.
-* Tutorial 3: Predicting metastasis-related TMEs from integrated colorectal cancer and liver metastasis slices.
+* Tutorial 1: Integrating slices 151673, 151674, 151675, and 151676 of the DLPFC dataset.
+* Tutorial 2: Integrating two breast cancer slices.
+* Tutorial 3: Identifying metastasis-related TMEs through integrative analysis of primary colorectal cancer and liver metastasis slices.
 
 ## References
 
