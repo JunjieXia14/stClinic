@@ -34,7 +34,7 @@ The specific software dependencies are listed in "requirements.txt".
 
 ## Quick start
 
-### Unsupervised stClinic for integrating multiple slices
+### Learning batch-corrected features across slices using unsupervised stClinic
 
 #### Input
 
@@ -68,7 +68,7 @@ An concatenated `AnnData` object with stClinic embeddings and UMAP coordinates o
 
 Note: To reduce your waiting time, we have uploaded the processed `AnnData` object into `Datasets/DLPFC`.
 
-### Supervised stClinic for predicting clinically relevant TMEs
+### Evaluating cluster importance using attention-based supervised learning
 
 #### Input
 
