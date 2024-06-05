@@ -27,6 +27,12 @@ random.seed(seed)
 torch.manual_seed(seed)
 torch.cuda.manual_seed(seed)
 
+# Set parameters
+import argparse
+parser = argparse.ArgumentParser(description='stClinic')
+parser.add_argument('--input_dir',   '-IP', type = str, default = '/home/zuocm/Share_data/xiajunjie/stClinic/Datasets/DLPFC/',    help='data directory')
+args = parser.parse_known_args()[0]
+
 # Load data
 section_ids = ['151673','151674','151675','151676']
 print(section_ids)
@@ -36,7 +42,7 @@ adj_list = []
 for idx, section_id in enumerate(section_ids):
 
     # Read h5 file
-    input_dir = os.path.join('/home/zuocm/Share_data/xiajunjie/stClinic/Datasets/DLPFC/', section_id)
+    input_dir = os.path.join(args.input_dir, section_id)
     adata = sc.read_visium(path=input_dir, count_file='filtered_feature_bc_matrix.h5', load_images=True)
     adata.var_names_make_unique(join="++")
 

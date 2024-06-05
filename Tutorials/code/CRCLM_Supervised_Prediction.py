@@ -48,7 +48,7 @@ type_idx[All_type == 'Metastasis'] = 1
 adata.uns['grading'] = type_idx
 
 # Run stClinic for supervised prediction
-adata = train_Prediction_Model(adata, pred_type='grading', lr=0.0529, device=used_device)
+adata = train_Prediction_Model(adata, pred_type='grading', lr=0.05, device=used_device)
 
 # Save AnnData object
 adata.write(path / f'integrated_adata_CRCLM24.h5ad', compression='gzip')  

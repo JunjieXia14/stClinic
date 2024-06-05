@@ -28,6 +28,12 @@ random.seed(seed)
 torch.manual_seed(seed)
 torch.cuda.manual_seed(seed)
 
+# Set parameters
+import argparse
+parser = argparse.ArgumentParser(description='stClinic')
+parser.add_argument('--input_dir',   '-IP', type = str, default = '/home/zuocm/Share_data/xiajunjie/stClinic/Datasets/CRCLM/',    help='data directory')
+args = parser.parse_known_args()[0]
+
 # Load data
 rad_list = [100, 40, 250, 50, 200]
 source_ids = ['Villemin et al', 'Valdeolivas et al', 'Wu et al', 'Garbarino et al', 'Wang et al']
@@ -39,7 +45,7 @@ section_ids = []
 idx = 0
 for source_id, rad in zip(source_ids, rad_list):
 
-    input_dir = os.path.join('/home/zuocm/Share_data/xiajunjie/stClinic/Datasets/CRCLM/', source_id)
+    input_dir = os.path.join(args.input_dir, source_id)
 
     for type in ['CRC', 'LM']:
 
