@@ -1,6 +1,6 @@
 # stClinic
 
-*stClinic dissects clinically relevant niches by integrating spatial multi-slice multi-omics data in dynamic graphs
+*stClinic dissects clinically relevant niches by integrating spatial multi-slice multi-omics data in dynamic graphs*
 
 ## Overview
 
