@@ -48,10 +48,10 @@ Run the following commands in Linux Bash Shell:
 
 ```bash
 cd Tutorials/code
-python DLPFC_Unsupervised_Integration.py
+python DLPFC_Unsupervised_Integration.py --input_dir ../../Datasets/DLPFC
 ```
 
-The script automatically (1) loads the input data as concatenated `AnnData` object, (2) builds an initial unified graph based on spatial locations and omics profiles, (3) learns batch-corrected features of four slices by stClinic in an unsupervised manner, (4) identifies spatial domains based on batch-corrected features using the `mclust` algorithm, and (5) maps the latent features into 2D-UMAP space.
+The script automatically (1) loads the input data as concatenated `AnnData` object, (2) builds an initial unified graph based on spatial locations and omics profiles, (3) learns batch-corrected features of four slices by stClinic in an unsupervised manner, (4) identifies spatial domains based on batch-corrected features using the `mclust` algorithm, and (5) maps the latent features into 2D-UMAP space. It takes 5 mins.
 
 **Hyperparameters**
 
@@ -61,8 +61,6 @@ The script automatically (1) loads the input data as concatenated `AnnData` obje
 * n_top_genes: The number of highly variable genes selected for each slice. The default value is 5000, which can be larger than the default for heterogeneous datasets.
 * n_centroids: The number of components of the GMM.
 * lr: The learning rate used by stClinic when extracting batch-corrected features in slices. The default value is 0.0005. You can adjust it from 0.0005/20 to 0.0005 based on your data.
-* input_dir: defines the directory of input data files.
-* path: defines the directory of output data files. The default value is './DLPFC'.
 
 #### Output
 
@@ -78,11 +76,11 @@ We take the human colorectal cancer and liver metastasis (CRCLM) dataset of 10X 
 
 #### Run
 
-We firstly run the following commands in Linux Bash Shell to (1) learn shared features of 24 CRCLM slices, (2) identifies spatial domains according to the joint embeddings by `Louvain` algorithm, and (3) project the latent features into 2D-UMAP space.
+We firstly run the following commands in Linux Bash Shell to (1) learn shared features of 24 CRCLM slices, (2) identifies spatial domains according to the joint embeddings by `Louvain` algorithm, and (3) project the latent features into 2D-UMAP space. It takes 20 mins.
 
 ```bash
 cd Tutorials/code
-python CRCLM_Unsupervised_Integration.py
+python CRCLM_Unsupervised_Integration.py --input_dir ../../Datasets/DLPFC
 ```
 
 Note: To reduce your waiting time, we have uploaded the processed `AnnData` object into `Datasets/CRCLM`.
@@ -93,12 +91,12 @@ We then run the following command in Linux Bash Shell:
 python CRCLM_Supervised_Prediction.py
 ```
 
-This script automatically (1) computes 6 statistics measures of each cluster, (2) fuses them into slice representations by attention mechanism, (3) predicts condition-specific TMEs with the highest cluster contribution scores on different clinical states.
+This script automatically (1) computes 6 statistics measures of each cluster, (2) fuses them into slice representations by attention mechanism, (3) predicts condition-specific TMEs with the highest cluster contribution scores on different clinical states. It takes 1 mins.
 
 **Hyperparameters**
 
 * pred_type: The type of clinical data. The value is 'survival' when using survival time; and the value is 'grading' when using categorical data.
-* lr: The learning rate used by supervised stClinic. The parameter is set to the value with the highest C-Index or classification accuracy in the grid search program of cross-validation.
+* lr: The learning rate used by supervised stClinic. The default value is 0.05. You can adjust it  to the value with the highest C-Index or classification accuracy in the grid search program of cross-validation based on your data..
 
 #### Output
 
@@ -122,4 +120,5 @@ Three more detailed tutorials and further visualization are introduced in the `T
 
 ## Citation
 
-* Xia J, Xu Y, Xu Y, Gao P, Zhang J, Wang Y, Zuo C*. stClinic dissects clinically relevant niches by integrating spatial multi-slice multi-omics data in dynamic graphs. 2024. (Submitted)
+* Chunman Zuo†,*, Junjie Xia†, Yupeng, Xu, Ying Xu, Pingting Gao, Jing Zhang,
+  Haobin Chen, and Yan Wang. stClinic dissects clinically relevant niches by integrating spatial multi-slice multi-omics data in dynamic graphs. 2024. (Submitted)
