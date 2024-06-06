@@ -60,7 +60,7 @@ The script automatically (1) loads the input data as concatenated `AnnData` obje
 * k: The number of mutual nearest neighbors used to construct inter-edges across slices. In heterogeneous tissues such as tumors, the value is set to 5; in spatial multi-omics dataset, the value is set to 10; and in relatively homogeneous tissues, the value is 1 or 0.
 * n_top_genes: The number of highly variable genes selected for each slice. The default value is 5000, which can be larger than the default for heterogeneous datasets.
 * n_centroids: The number of components of the GMM.
-* lr: The learning rate used by stClinic when extracting batch-corrected features in slices. The default value is 0.0005. You can adjust it from 0.0005/20 to 0.0005 based on your data.
+* lr_integration: The learning rate used by stClinic when extracting batch-corrected features in slices. The default value is 0.0005. You can adjust it from 0.0005/20 to 0.0005 based on your data.
 
 #### Output
 
@@ -80,7 +80,7 @@ We first run the following commands in Linux Bash Shell to (1) learn shared feat
 
 ```bash
 cd Tutorials/code
-python CRCLM_Unsupervised_Integration.py --input_dir ../../Datasets/DLPFC
+python CRCLM_Unsupervised_Integration.py --input_dir ../../Datasets/CRCLM
 ```
 
 Note: To reduce your waiting time, we have uploaded the processed `AnnData` object into `Datasets/CRCLM`.
@@ -96,7 +96,7 @@ This script automatically (1) computes 6 statistics measures of each cluster, (2
 **Hyperparameters**
 
 * The type of clinical data. The value is 'survival' when using survival time, and the value is 'grading' when using categorical data.
-* lr: The learning rate used by supervised stClinic. The default value is 0.05. You can adjust it to the value with the highest C-Index or classification accuracy in the grid search program of cross-validation based on your data.
+* lr_prediction: The learning rate used by supervised stClinic. The default value is 0.05. You can adjust it to the value with the highest C-Index or classification accuracy in the grid search program of cross-validation based on your data.
 
 #### Output
 

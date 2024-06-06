@@ -8,6 +8,12 @@ import random
 from stClinic.Utilities import *
 from stClinic.Module import *
 
+# Set parameters
+import argparse
+parser = argparse.ArgumentParser(description='stClinic')
+parser.add_argument('--lr_prediction',   '-LRP', type = float, default = 0.05,    help='The learning rate used by supervised stClinic')
+args = parser.parse_known_args()[0]
+
 import torch
 used_device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 print(used_device)
@@ -48,7 +54,7 @@ type_idx[All_type == 'Metastasis'] = 1
 adata.uns['grading'] = type_idx
 
 # Run stClinic for supervised prediction
-adata = train_Prediction_Model(adata, pred_type='grading', lr=0.05, device=used_device)
+adata = train_Prediction_Model(adata, pred_type='grading', lr=args.lr_prediction, device=used_device)
 
 # Save AnnData object
 adata.write(path / f'integrated_adata_CRCLM24.h5ad', compression='gzip')  
