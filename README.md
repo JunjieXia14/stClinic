@@ -118,7 +118,3 @@ More detailed tutorials for each dataset are described in the `Tutorials/noteboo
 * CytoCommunity: https://github.com/huBioinfo/CytoCommunity
 * PathFinder: https://github.com/Biooptics2021/PathFinder
 
-## Citation
-
-* Chunman Zuo†,*, Junjie Xia†, Yupeng, Xu, Ying Xu, Pingting Gao, Jing Zhang,
-  Haobin Chen, and Yan Wang. stClinic dissects clinically relevant niches by integrating spatial multi-slice multi-omics data in dynamic graphs. 2024. (Submitted)
